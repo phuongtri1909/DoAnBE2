@@ -11,6 +11,17 @@
                         <span class="text-danger">{{ $errors->first('propertiesName') }}</span>
                     @endif
                 </div>
+                
+                <div class="form-group mb-3">
+                    <label for="category">Danh mục</label>
+                    <select class="form-select form-control" aria-label="Default select example" id="category"
+                        name="category">
+                        @foreach ($categories as $value)
+                            <option value="{{ $value->id }}">{{ $value->categoryName }}</option>
+                        @endforeach
+
+                    </select>
+                </div>
 
                 <div class="d-grid mx-auto text-left">                 
                     <button type="submit" class="btn btn-outline-success ">Thêm</button>

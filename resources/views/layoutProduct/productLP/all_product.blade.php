@@ -9,7 +9,7 @@
             <ul class="breadcrumb">
 
                 <a href="{{ route('admin') }}">
-                   <li>Home</li>
+                    <li>Home</li>
                 </a>
 
                 <li><i class='bx bx-chevron-right'></i></li>
@@ -34,9 +34,9 @@
                     </div>
 
                     <div class="col-sm-1">
-                      <a class="btn btn-outline-success btn-sm" href="{{route('product.create')}}"> 
-                        <i class="bi bi-plus-square-dotted"></i>
-                    </a>                      
+                        <a class="btn btn-outline-success btn-sm" href="{{ route('selectedCategories') }}">
+                            <i class="bi bi-plus-square-dotted"></i>
+                        </a>
                     </div>
 
                 </div>
@@ -57,79 +57,83 @@
                             <th style="width: 2%">
                                 Id
                             </th>
-                            <th style="width: 18%">
-                                Name
+                            <th style="width: 19%">
+                                Tên sản phẩm
                             </th>
-                            <th style="width: 8%">
-                                Image
+                            <th style="width: 19%">
+                                Gía sản phẩm
                             </th>
-                            <th style="width: 32%;">
-                                Description
+                            <th style="width: 19%;">
+                                Thuộc danh mục
                             </th>
-                            <th style="width: 10%" class="text-center">
-                                Price
+                            <th style="width: 19%">
+                                thuộc hãng sản xuất
                             </th>
-                            <th style="width: 2%" class="text-center">
-                                Feature
+                            <th style="width: 19%">
+                                Miêu tả sản phẩm
                             </th>
-                            <th style="width: 2%" class="text-center">
-                                Manu_id
-                            </th>
-                            <th style="width: 2%" class="text-center">
-                                Type_id
-                            </th>
-                            <th style="width: 24%">
+                            <th style="width: 2%">
+
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- <?php foreach($getAllProductsNew as $value):?>               --}}
-                        <tr>
-                            <td>
-                                {{-- <?php echo $value['id']; ?> --}}
-                            </td>
-                            <td>
-                                <a>
-                                    {{-- <?php echo $value['name']; ?> --}}
-                                </a>
-                                <br />
-                                <small>
-                                    {{-- Created <?php echo $value['created_at']; ?> --}}
-                                </small>
-                            </td>
-                            <td>
-                                <ul class="list-inline">
-                                    <li class="list-inline-item">
-                                        {{-- <img alt="Avatar" class="table-avatar" src="../../../img/<?php echo $value['image']; ?>"> --}}
-                                    </li>
-                                </ul>
-                            </td>
-                            <td nowrap style="overflow: hidden; text-overflow: ellipsis; max-width: 20ch;">
-                                <!--style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"-->
-                                    {{-- <?php echo $value['description']; ?> --}}
-                            </td>
-                            <td class="project-state">
-                                {{-- <?php echo number_format($value['price']); ?> VNĐ --}}
-                            </td>
-                            <td class="project-state">
-                                {{-- <?php echo $value['feature']; ?> --}}
-                            </td>
-                            <td class="project-state">
-                                {{-- <?php echo $value['manu_id']; ?> --}}
-                            </td>
-                            <td class="project-state">
-                                {{-- <?php echo $value['type_id']; ?> --}}
-                            </td>
-                            <td class="project-actions text-right">
-                                <a class="btn btn-outline-info btn-sm" href=""> {{-- up_products.php?id=<?= $value['id'] ?> --}}
-                                  <i class="bi bi-pencil"></i>
-                                </a>
-                                <a class="btn btn-outline-danger btn-sm" href=""> {{-- del_products.php?id=<?= $value['id'] ?> --}}
-                                  <i class="bi bi-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        {{-- <?php endforeach; ?> --}}
+
+                        @foreach ($products as $value)
+                            <tr>
+                                <td>
+                                    {{ $value->id }}
+                                </td>
+                                <td>
+                                    <a>
+                                        {{ $value->productName }}
+                                    </a>
+                                    <br />
+                                    <small>
+                                        {{ $value->created_at }}
+                                    </small>
+                                </td>
+
+
+                                <td class="project-state">
+                                    {{ $value->productPrice }}
+                                </td>
+                                <td class="project-state">
+                                    {{ $value->categoryName }}
+                                </td>
+                                <td class="project-state">
+                                    {{ $value->manufacturerName }}
+                                </td>
+
+
+                                <td nowrap style="overflow: hidden; text-overflow: ellipsis; max-width: 20ch;">
+                                    <!--style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"-->
+                                        {{ $value->descriptionProduct }}
+                                </td>
+
+                                <td class="project-actions text-right">
+
+                                    <form action="{{ route('editSelectedCategories') }}" method="post"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <input hidden value="{{ $value->productCategory }}" type="text"
+                                            id="idCategory" class="form-control" name="idCategory" required autofocus>
+                                        <input hidden value="{{ $value->id }}" type="text" id="idProduct"
+                                            class="form-control" name="idProduct" required autofocus>
+                                        <button type="submit" class="btn btn-outline-info btn-sm"> <i
+                                                class="bi bi-pencil"></i></button>
+                                    </form>
+
+                                    <form action="{{ route('product.destroy',$value->id) }}" method="post"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-outline-danger btn-sm"> <i
+                                                class="bi bi-trash"></i></button>
+                                    </form>                             
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

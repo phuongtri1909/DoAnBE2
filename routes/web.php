@@ -35,3 +35,13 @@ Route::resource('/properties',PropertiesController::class);
 
 //route: product
 Route::resource('product',ProductController::class);
+Route::get('product-create',[ProductController::class,'nextCreate'])->name('selectedCategories');
+Route::post('product-selected-edit',[ProductController::class,'nextEdit'])->name('editSelectedCategories');
+Route::post('product-edit',[ProductController::class,'edit'])->name('editCategories');
+
+
+
+//Website 
+Route::get('/',function (){return view('layoutWebs/header');})->name('home');
+Route::get('/footer',function (){return view('layoutWebs/footer');});
+

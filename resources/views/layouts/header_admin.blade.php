@@ -7,10 +7,9 @@
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	
 	<!-- My CSS -->
-	<link rel="stylesheet" href="{{ asset('storage/css/app.css') }}">
-
-	<link rel="stylesheet" href="{{ asset('storage/css/adminlte.min.css') }}">
-	<link rel="stylesheet" href="{{ asset('storage/css/app.scss') }}">
+	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/app.scss') }}">
 	
 	<title>Admin Store</title>
 </head>

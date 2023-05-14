@@ -14,6 +14,7 @@ class Properties extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'propertiesName',     
+        'propertiesName', 
+        'category_id'    
     ];
 }
