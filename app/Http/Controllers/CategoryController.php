@@ -40,13 +40,11 @@ class CategoryController extends Controller
     public function editCategory(Request $request)
     {
         $data = $request->all();
-        
         $category = Category::findOrFail($data['idCategory']);
         return view('products.category_product.edit_category', compact('category'));
     }
     
     public function adminUpdateCategory(Request $request, $id){
-      
     $category = Category::find($id);
     $category->categoryName = $request['categoryName'];
     $category->save();

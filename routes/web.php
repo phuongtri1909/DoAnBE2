@@ -6,13 +6,19 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\PropertiesController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
-
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ProductFavoriteController;
+use App\Http\Controllers\ProductCartController;
+use App\Constants\UserType;
 use App\Models\Manufacturer;
 
-//Route admin
-Route::get('/admin', [AdminController::class,'index'])->name(('admin'));
 
+
+Route::prefix('/')->middleware(['auth', 'adminMiddleware:'.UserType::ADMIN])->group(function () {
+    //Route admin
+Route::get('/admin', [AdminController::class,'index'])->name(('admin'));
 
 //Route: category
 Route::get('category',[CategoryController::class,'index'])->name('category');
@@ -35,3 +41,39 @@ Route::resource('/properties',PropertiesController::class);
 
 //route: product
 Route::resource('product',ProductController::class);
+Route::get('product-create',[ProductController::class,'nextCreate'])->name('selectedCategories');
+Route::post('product-selected-edit',[ProductController::class,'nextEdit'])->name('editSelectedCategories');
+Route::post('product-edit',[ProductController::class,'edit'])->name('editCategories');
+
+});
+  
+
+
+
+//Website 
+Route::get('/',[HomeController::class,'index'])->name('3TDL Store');
+Route::get('detail/{productName}', [HomeController::class,'detailProduct'])->name('detailProduct');
+
+//search 
+Route::get('search', [HomeController::class,'search'])->name('search');
+
+//register
+Route::get('register', [AccountController::class,'registerUser'])->name('registerUser');
+Route::post('create-user',[AccountController::class,'createUser'])->name('createUser');
+
+//login
+Route::get('login', [AccountController::class,'loginUser'])->name('loginUser');
+Route::post('confirm-login',[AccountController::class,'confirmLogin'])->name('confirmLogin');
+//logout
+Route::get('signout', [AccountController::class, 'signOut'])->name('signout')->middleware('redirectIfNotLoggedIn');
+
+//product_favorite
+
+Route::get('product-favorite',[ProductFavoriteController::class, 'index'])->name('productFavorite');
+
+Route::post('favorite/add', [ProductFavoriteController::class, 'favoriteProductAdd'])->name('favoriteProductAdd')->middleware('loginRequired');
+Route::post('favorite/remove', [ProductFavoriteController::class, 'favoriteProductRemove'])->name('favoriteProductRemove')->middleware('loginRequired');
+
+//product_cart
+
+Route::post('cart/add', [ProductCartController::class, 'cartProductAdd'])->name('cartProductAdd')->middleware('loginRequired');
