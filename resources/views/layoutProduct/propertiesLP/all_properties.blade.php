@@ -59,30 +59,37 @@
                             <th style="width: 18%">
                                 Tên Thuộc Tính
                             </th>
-
+                            <th style="width: 18%">
+                                Thuộc danh mục
+                            </th>
                             <th style="width: 24%">
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($properties as $value)
+                       
+                        @foreach ($result as $value)
                             <tr>
                                 <td>
+                                   
                                     {{ $value->id }}
                                 </td>
                                 <td>
                                     <a>
-                                        {{ $value['propertiesName'] }}
+                                        {{ $value->propertiesName }}
                                     </a>
                                     <br />
                                     <small>
-                                        {{ $value['created_at'] }}
+                                        {{ $value->created_at }}
                                     </small>
+                                </td>
+                                <td>
+                                    {{ $value->categoryName }}
                                 </td>
                                 <td class="project-actions text-right">
 
                                     <a class="btn btn-outline-info btn-sm"
-                                        href="{{ route('properties.edit', $value->id) }}"><i
+                                    href="{{ route('properties.edit', $value->id) }}"><i
                                             class="bi bi-pencil"></i></a>
 
                                     <form action="{{ route('properties.destroy',$value->id) }}" method="post"

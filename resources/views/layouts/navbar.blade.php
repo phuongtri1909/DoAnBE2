@@ -15,7 +15,7 @@
         <span class="num">8</span>
     </a>
     <a href="#" class="profile">
-        <img src="{{asset('storage/images/tri.jpg')}}">
+        <img src="{{asset('images/tri.jpg')}}">
     </a>
 </nav>
 <!-- NAVBAR -->

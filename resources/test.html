@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Signup Form</title>
+        <link rel="stylesheet" href="signup.css">
+
+        <style>
+    
+    .cart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.cart-header h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.go-back a {
+  display: flex;
+  align-items: center;
+  color: #007bff;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.go-back a:hover {
+  text-decoration: none;
+  color: #0056b3;
+}
+
+.go-back i {
+  margin-right: 0.5rem;
+}
+
+.cart-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.cart-empty i {
+  font-size: 4rem;
+  color: #6c757d;
+}
+
+.cart-empty h2 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.cart-empty p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #6c757d;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #007bff;
+  border: 1px solid #007bff;
+  border-radius: 0.25rem;
+  transition: all 0.2sease-in-out;
+}
+
+.btn:hover {
+  background-color: #0069d9;
+  border-color: #0062cc;
+  text-decoration: none;
+}
+  </style>
+    </head>
+    <body>
+        <div class="cart-header">
+            <div class="go-back">
+                <a href="#">
+                    <i class="fas fa-chevron-left"></i> Trở về
+                </a>
+            </div>
+            <h1>Giỏ hàng</h1>
+        </div>
+
+        <div class="cart-empty">
+            <i class="fas fa-shopping-cart"></i>
+            <h2>Giỏ hàng của bạn đang trống</h2>
+            <p>Bạn có thể thêm sản phẩm vào giỏ hàng bằng cách tìm kiếm hoặc
+                truy cập vào các danh mục sản phẩm.</p>
+            <a href="#" class="btn btn-primary">Tiếp tục mua sắm</a>
+        </div>
+
+    </body>
+</html>

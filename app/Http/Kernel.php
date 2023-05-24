@@ -63,5 +63,13 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+      
+    ];
+
+    protected $routeMiddleware = [
+        // Các middleware khác ở đây
+        'adminMiddleware' => \App\Http\Middleware\AdminMiddleware::class,
+        'redirectIfNotLoggedIn' => \App\Http\Middleware\RedirectIfNotLoggedIn::class,
+        'loginRequired' => \App\Http\Middleware\LoginRequired::class,
     ];
 }
