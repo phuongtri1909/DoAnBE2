@@ -123,6 +123,15 @@ class OrderController extends Controller
                 ->subject('Vui lòng xác nhận đơn hàng!!');
         });
 
+<<<<<<< Updated upstream
+=======
+        //cập nhật cart cho user
+        $cartItemCount = DB::table('product_carts')
+            ->where('user_id', auth()->user()->id)
+            ->count();
+        session()->put('cart', $cartItemCount);
+
+>>>>>>> Stashed changes
         // Trả về view để xác nhận thanh toán
         return redirect()->route("allOrder");
     }
@@ -132,21 +141,24 @@ class OrderController extends Controller
         DB::table('orders')
             ->where('order_id', $request->order_id)
             ->update(['user_confirmed' => 1]);
-            
+
         // Gửi email xác nhận đơn hàng
-        Mail::send('emails.email_confirm', ['order' => $request], function ($message) use ( $request) {
-            $message->to( $request->email,  $request->fullName)
+        Mail::send('emails.email_confirm', ['order' => $request], function ($message) use ($request) {
+            $message->to($request->email, $request->fullName)
                 ->subject('Bạn vừa đặt hàng tại 3TDL Store với mã đơn hàng: #' . $request->order_id);
         });
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
         return redirect()->route('allOrder');
     }
-    
+
     public function cancelOrder(Request $request)
     {
         DB::table('orders')
             ->where('order_id', $request->order_id)
             ->update(['user_confirmed' => 2]);
-            
 
         return redirect()->route('allOrder');
     }
@@ -167,7 +179,7 @@ class OrderController extends Controller
 
     public function orderDetail(Request $request)
     {
-        
+
         $order = Order::select('orders.*', 'order_details.product_id', 'order_details.product_quantity')
             ->join('order_details', 'orders.order_id', '=', 'order_details.order_id')
             ->where('orders.order_id', $request->order_id)
@@ -188,25 +200,25 @@ class OrderController extends Controller
     {
         $order = null;
         $order_products = null;
-        return view('website.order_lookup',compact('order','order_products'));
+        return view('website.order_lookup', compact('order', 'order_products'));
     }
 
     public function searchResults(Request $request)
     {
         $order = Order::select('orders.*', 'order_details.product_id', 'order_details.product_quantity')
-        ->join('order_details', 'orders.order_id', '=', 'order_details.order_id')
-        ->where('orders.order_id', $request->order_id)
-        ->first();
-        
+            ->join('order_details', 'orders.order_id', '=', 'order_details.order_id')
+            ->where('orders.order_id', $request->order_id)
+            ->first();
+
         $order_products = DB::table('order_details')
-        ->join('products', 'order_details.product_id', '=', 'products.id')
-        ->leftJoin('product_images', 'products.id', '=', 'product_images.product_id')
-        ->groupBy('order_details.product_id', 'order_details.product_quantity', 'products.productName', 'products.ProductPrice')
-        ->select('order_details.product_id', 'order_details.product_quantity', 'products.productName', 'products.ProductPrice', DB::raw('MIN(product_images.product_imageName) AS product_imageName'))
-        ->where('order_details.order_id', $request->order_id)
-        ->get();
-        
-        return view('website.order_lookup',compact('order','order_products'));
+            ->join('products', 'order_details.product_id', '=', 'products.id')
+            ->leftJoin('product_images', 'products.id', '=', 'product_images.product_id')
+            ->groupBy('order_details.product_id', 'order_details.product_quantity', 'products.productName', 'products.ProductPrice')
+            ->select('order_details.product_id', 'order_details.product_quantity', 'products.productName', 'products.ProductPrice', DB::raw('MIN(product_images.product_imageName) AS product_imageName'))
+            ->where('order_details.order_id', $request->order_id)
+            ->get();
+
+        return view('website.order_lookup', compact('order', 'order_products'));
     }
 
 }
