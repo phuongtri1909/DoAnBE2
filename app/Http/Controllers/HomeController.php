@@ -50,6 +50,11 @@ class HomeController extends Controller
         return view('website.home', compact('categories', 'product_by_category', 'manufacturer_by_category', 'product_favorite'));
     }
 
+    public function categoryUser()
+    {
+       
+    }
+
     public function detailProduct($productName)
     {
 

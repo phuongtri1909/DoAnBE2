@@ -47,9 +47,11 @@
                     <div class="col-2 primary">
                         <div id="menu-category">
                             <ul class="ul-menu">
-                                <li class="li-menu"><a href="cuahang.html"> <strong>Cửa Hàng</strong></a></li>
-                                <li class="li-menu"><a href="cuahang.html"> <strong>Cửa Hàng</strong></a></li>
-                                <li class="li-menu"><a href="cuahang.html"> <strong>Cửa Hàng</strong></a></li>
+                                @foreach ($categories as $category)
+                                <li class="li-menu"><a href=""> <strong>{{ $category->categoryName }}</strong></a></li>
+                                @endforeach
+                               
+                               
                             </ul>
                         </div>
                     </div>
