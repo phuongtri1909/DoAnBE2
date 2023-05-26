@@ -48,10 +48,11 @@
                         <div id="menu-category">
                             <ul class="ul-menu">
                                 @foreach ($categories as $category)
-                                <li class="li-menu"><a href=""> <strong>{{ $category->categoryName }}</strong></a></li>
+                                    <li class="li-menu">
+                                        <a
+                                            href="{{ route('categoryUser', $categoryName = Str::slug($category->categoryName, '-')) }}"><strong>{{ $category->categoryName }}</strong></a>
+                                    </li>
                                 @endforeach
-                               
-                               
                             </ul>
                         </div>
                     </div>
@@ -123,8 +124,8 @@
                                     @foreach ($manufacturer_by_category[$category->id] as $manufacturer)
                                         <div class="section-nav">
                                             <ul class="section-tab-nav tab-nav">
-                                                <li class="active btn"><a data-toggle="tab"
-                                                        href="#tab1">{{ $manufacturer->manufacturerName }}</a></li>
+                                                <li class="active btn"><a 
+ href="{{ route('categoryByManufacturer', ['categoryName' => ($categoryName = Str::slug($category->categoryName, '-')), 'manufacturerName' => ($manufacturerName = Str::slug($manufacturer->manufacturerName, '-'))]) }}">{{ $manufacturer->manufacturerName }}</a></li>
                                             </ul>
                                         </div>
                                     @endforeach
@@ -159,13 +160,9 @@
                                                 <div class="product-body">
 
                                                     <h3 class="product-name">
-
-
-                                                        <a class="button" href="{{ route('detailProduct', $productName = Str::slug($item->productName, '-')) }}"> {{ $item->productName }}</a>
-
-                                    
-
-
+                                                        <a class="button"
+                                                            href="{{ route('detailProduct', $productName = Str::slug($item->productName, '-')) }}">
+                                                            {{ $item->productName }}</a>
                                                     </h3>
 
                                                     <h4 class="product-price">

@@ -125,7 +125,7 @@
                                         <div class="is-flex is-align-content-center my-2">
                                             <p
                                                 class="box-product-promotion-number has-text-primary-light has-background-danger-dark">
-                                                1</p> <a target="_blank" href=""
+                                                1</p> <a href=""
                                                 class="box-product-promotion-detail mx-1 has-text-black button__promotion">Ưu
                                                 đãi
                                                 Phòng chờ hạng thương gia
@@ -134,7 +134,7 @@
                                         <div class="is-flex is-align-content-center my-2">
                                             <p
                                                 class="box-product-promotion-number has-text-primary-light has-background-danger-dark">
-                                                2</p> <a target="_blank" href=""
+                                                2</p> <a href=""
                                                 class="box-product-promotion-detail mx-1 has-text-black button__promotion">Nhận
                                                 ngay
                                                 ưu đãi YouTube Premium dành cho chủ sở hữu Samsung Galaxy
@@ -143,7 +143,7 @@
                                         <div class="is-flex is-align-content-center my-2">
                                             <p
                                                 class="box-product-promotion-number has-text-primary-light has-background-danger-dark">
-                                                3</p> <a target="_blank" href=""
+                                                3</p> <a href=""
                                                 class="box-product-promotion-detail mx-1 has-text-black button__promotion">Tặng
                                                 Sim
                                                 4G Mobifone siêu data 500GB/Tháng - Miễn phí 12 tháng (Giá tốt liên hệ
@@ -154,7 +154,7 @@
                                         <div class="is-flex is-align-content-center my-2">
                                             <p
                                                 class="box-product-promotion-number has-text-primary-light has-background-danger-dark">
-                                                4</p> <a target="_blank" href=""
+                                                4</p> <a href=""
                                                 class="box-product-promotion-detail mx-1 has-text-black button__promotion">Giảm
                                                 ngay
                                                 3.000.000đ khi tham gia thu cũ đổi mới - Giá thu tốt nhất thị trường
@@ -163,7 +163,7 @@
                                         <div class="is-flex is-align-content-center my-2">
                                             <p
                                                 class=" box-product-promotion-number has-text-primary-light has-background-danger-dark">
-                                                5</p> <a target="_blank" href="#800k"
+                                                5</p> <a href="#800k"
                                                 class="box-product-promotion-detail mx-1 has-text-black button__promotion">Giảm
                                                 ngay
                                                 800.000đ khi thanh toán qua VNPAY
@@ -177,14 +177,25 @@
 
                                 <div class="row">
 
-                                    <div class="col-md-8"><button href="#"
-                                            class="btn btn-timeOrder btn-danger btn-lg "
-                                            style="width: 273px;margin-top: 10px;" \>
-                                            <h6 style="color: black;">MUA NGAY
-                                            </h6>
-                                            <span style=" font-size: 12px; ">(Giao
-                                                nhanh từ 2 giờ hoặc nhận từ cửa hàng)</span>
-                                        </button>
+                                    <div class="col-md-8">
+
+
+                                        <form action="{{ route('cartProductBye') }}" method="POST"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            <input hidden value="{{ $item->id }}" type="text" id="product_id"
+                                                class="form-control" name="product_id" required autofocus>
+                                                <button class="btn btn-timeOrder btn-danger btn-lg "
+                                                style="width: 273px;margin-top: 10px;" \>
+                                                <h6 style="color: black;">MUA NGAY
+                                                </h6>
+                                                <span style=" font-size: 12px; ">(Giao
+                                                    hàng nhanh)</span>
+                                            </button>
+                                        </form>
+
+                                        
+
                                     </div>
                                     <div class="col-md-4">
 

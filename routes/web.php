@@ -58,7 +58,9 @@ Route::post('/cancel-order-admin', [AdminController::class, 'cancelOrderAdmin'])
 
 //Website 
 Route::get('/',[HomeController::class,'index'])->name('3TDL Store');
-Route::get('categoryUser/{}',[HomeController::class,'categoryUser'])->name('categoryUser');
+Route::get('category-user/{categoryName}',[HomeController::class,'categoryUser'])->name('categoryUser');
+Route::get('category-user/{categoryName}/{manufacturerName}',[HomeController::class,'categoryByManufacturer'])->name('categoryByManufacturer');
+
 Route::get('detail/{productName}', [HomeController::class,'detailProduct'])->name('detailProduct');
 
 //search 
@@ -84,9 +86,10 @@ Route::post('favorite/remove', [ProductFavoriteController::class, 'favoriteProdu
 Route::get('product-cart',[ProductCartController::class, 'index'])->name('productCart');
 
 Route::post('cart/add', [ProductCartController::class, 'cartProductAdd'])->name('cartProductAdd')->middleware('loginRequired');
-Route::post('cart/Decrease', [ProductCartController::class, 'cartProductDecrease'])->name('cartProductDecrease')->middleware('loginRequired');
+Route::post('cart/decrease', [ProductCartController::class, 'cartProductDecrease'])->name('cartProductDecrease')->middleware('loginRequired');
 Route::post('cart/remove', [ProductCartController::class, 'cartProductRemove'])->name('cartProductRemove')->middleware('loginRequired');
 
+Route::post('cart/bye', [ProductCartController::class, 'cartProductBye'])->name('cartProductBye')->middleware('loginRequired');
 
 ///order 
 Route::get('order',[OrderController::class, 'index'])->name('order')->middleware('redirectIfNotLoggedIn');
@@ -102,3 +105,5 @@ Route::post('order-detail',[OrderController::class, 'orderDetail'])->name('order
 Route::get('order-lookup',[OrderController::class, 'orderLookup'])->name('orderLookup');
 
 Route::post('search-results',[OrderController::class, 'searchResults'])->name('searchResults');
+
+//search-results

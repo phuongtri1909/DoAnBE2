@@ -123,6 +123,13 @@ class OrderController extends Controller
                 ->subject('Vui lòng xác nhận đơn hàng!!');
         });
 
+        //cập nhật cart cho user
+        $cartItemCount = DB::table('product_carts')
+        ->where('user_id', auth()->user()->id)
+        ->count();
+        session()->put('cart', $cartItemCount);
+        
+        
         // Trả về view để xác nhận thanh toán
         return redirect()->route("allOrder");
     }
@@ -138,6 +145,7 @@ class OrderController extends Controller
             $message->to( $request->email,  $request->fullName)
                 ->subject('Bạn vừa đặt hàng tại 3TDL Store với mã đơn hàng: #' . $request->order_id);
         });
+        
         return redirect()->route('allOrder');
     }
     

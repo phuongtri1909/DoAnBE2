@@ -33,12 +33,11 @@
                                         <span class="me-3">date: {{ $order->created_at }}</span>
 
 
+                                       
                                         @if ($order->user_confirmed == UserConfirm::DaXacNhan)
 
                                             @if ($order->admin_confirmed == AdminConfirm::ChuaXacNhan)
-                                                <div class="confirmation-box">
-                                                    <div class="close-btn">&times;</div>
-                                                    <p>Bạn muốn đồng ý đơn hàng này?</p>
+                                               
                                                     <form method="post" action="{{ route('comfirmAdmin') }}">
                                                         @csrf
                                                         <input type="hidden" name="order_id"
@@ -47,13 +46,12 @@
                                                             value="{{ $order->fullName }}">
                                                         <input type="hidden" name="email"
                                                             value="{{ $order->email }}">
-                                                        <button class="confirm-btn" type="submit"> xác nhận</button>
+                                                        <button  onclick="return confirm('Đồng ý xác nhận?')" class="badge rounded-pill bg-info" type="submit">Nhấn vào
+                                                            để xác nhận</button>
                                                     </form>
-                                                </div>
+                                             
 
-                                                <button id="show-confirmation-btn" class="badge rounded-pill bg-info"
-                                                    type="submit">Nhấn vào
-                                                    để xác nhận</button>
+                                              
                                             @elseif($order->admin_confirmed == AdminConfirm::DaXacNhan)
                                                 <span class="badge rounded-pill bg-info">Tiến hành giao hàng cho khách
                                                 </span>

@@ -62,9 +62,14 @@
                         <div class="bg-nav-hover">
                             <a href="{{ route('productCart') }}">
                                 <i class="fa fa-shopping-cart"></i>
-
                                 <span>Giỏ hàng của tôi</span>
-                                <div class="qty">2</div>
+                                <div class="qty">
+                                    @if (session('cart'))
+                                        {{ session('cart') }}
+                                    @else
+                                        0
+                                    @endif
+                                </div>
                             </a>
                         </div>
 
@@ -75,14 +80,13 @@
                             </a>
                         </div>
 
-                        @if (auth()->check() )
+                        @if (auth()->check())
                             <div class="bg-nav ">
                                 <a href="{{ route('signout') }}">
                                     <i class="fa-solid fa-user"></i>
                                     <span>{{ auth()->user()->fullName }}</span>
                                 </a>
                             </div>
-        
                         @else
                             <div class="bg-nav ">
                                 <a href="{{ route('loginUser') }}">
