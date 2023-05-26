@@ -24,6 +24,7 @@ class ProductController extends Controller
     {
         $pageName = 'Tất cả sản phẩm';
 
+<<<<<<< HEAD
         // $products = Product::select('products.*', 'categories.categoryName', 'properties.propertiesName', 'product_attributes.attribute_value')
         //     ->leftJoin('categories', 'products.productCategory', '=', 'categories.id')
         //     ->leftJoin('product_attributes', 'products.id', '=', 'product_attributes.product_id')
@@ -31,6 +32,8 @@ class ProductController extends Controller
         //    // ->where('products.id', 1)
         //     ->get();
 
+=======
+>>>>>>> nguyenPhuongTri
         $products = Product::select('products.*', 'categories.categoryName', 'manufacturers.manufacturerName')
             ->leftJoin('categories', 'products.productCategory', '=', 'categories.id')
             ->leftJoin('manufacturers', 'products.productManu', '=', 'manufacturers.id')              
@@ -50,7 +53,10 @@ class ProductController extends Controller
      */
     public function create(Request $request)
     {
+<<<<<<< HEAD
 
+=======
+>>>>>>> nguyenPhuongTri
         $result = DB::table('properties')
             ->join('categories', 'properties.category_id', '=', 'categories.id')
             ->select('categories.*', 'properties.*')
@@ -116,7 +122,10 @@ class ProductController extends Controller
                 $product->delete();
             }
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> nguyenPhuongTri
         return redirect()->route('product.index');
     }
 
@@ -160,11 +169,18 @@ class ProductController extends Controller
         $productAttributes = Product::select( 'properties.*','product_attributes.*')
             ->leftJoin('product_attributes', 'products.id', '=', 'product_attributes.product_id')
             ->leftJoin('properties', 'product_attributes.attribute_id', '=', 'properties.id')
+<<<<<<< HEAD
 
+=======
+>>>>>>> nguyenPhuongTri
             ->where('products.id', $idProduct)
             ->get();
 
         $manufacturers = Manufacturer::orderBy('created_at', 'desc')->get();
+<<<<<<< HEAD
+=======
+        
+>>>>>>> nguyenPhuongTri
         $result = DB::table('properties')
         ->join('categories', 'properties.category_id', '=', 'categories.id')
         ->select('categories.*', 'properties.*')

@@ -9,7 +9,10 @@
 	<!-- My CSS -->
 	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
+<<<<<<< HEAD
 	<link rel="stylesheet" href="{{ asset('css/app.scss') }}">
+=======
+>>>>>>> nguyenPhuongTri
 	
 	<title>Admin Store</title>
 </head>

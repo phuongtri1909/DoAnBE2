@@ -41,10 +41,15 @@
                         <option selected="selected" value="{{ $value->id }}">{{ $value->manufacturerName }}</option>
                         @else
                         <option value="{{ $value->id }}">{{ $value->manufacturerName }}</option>
+<<<<<<< HEAD
                         @endif
                            
                         @endforeach
 
+=======
+                        @endif         
+                        @endforeach
+>>>>>>> nguyenPhuongTri
                     </select>
                 </div>
 
@@ -69,6 +74,10 @@
                  @if($category->id == $idCategoryBefor)
                  
                     @foreach ($productAttributes as $attribute)
+<<<<<<< HEAD
+=======
+
+>>>>>>> nguyenPhuongTri
                 <div class="form-group mb-3">
                     <label for="attribute_{{ $attribute->id }}">{{ $attribute->propertiesName }}</label>
                     <input value="{{ $attribute->attribute_value }}" type="text" placeholder="{{ $attribute->propertiesName }}" id="attribute_{{ $attribute->id }}" class="form-control"
@@ -77,8 +86,16 @@
                         <span class="text-danger">{{ $errors->first('') }}</span>
                     @endif
                 </div>
+<<<<<<< HEAD
                 @endforeach
                  @else
+=======
+
+                @endforeach
+
+                 @else
+
+>>>>>>> nguyenPhuongTri
                     @foreach ($result as $attribute)
                 <div class="form-group mb-3">
                     <label for="attribute_{{ $attribute->id }}">{{ $attribute->propertiesName }}</label>
@@ -88,13 +105,25 @@
                         <span class="text-danger">{{ $errors->first('propertiesValue') }}</span>
                     @endif
                 </div>
+<<<<<<< HEAD
                 @endforeach                
                  
                 @foreach ($productAttributes as $attribute)
+=======
+
+                @endforeach                
+                 
+                @foreach ($productAttributes as $attribute)
+
+>>>>>>> nguyenPhuongTri
                 <div class="form-group mb-3">        
                     <input hidden  value="{{ $attribute->id }}"type="text" placeholder="{{ $attribute->propertiesName }}" id="attribute_{{ $attribute->id }}" class="form-control"
                         name="attributes[{{ $attribute->id }}]" required >
                 </div>
+<<<<<<< HEAD
+=======
+                
+>>>>>>> nguyenPhuongTri
                 @endforeach
 
                 @endif

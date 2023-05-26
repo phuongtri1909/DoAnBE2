@@ -28,7 +28,47 @@ function addAttributes() {
         attributeList.appendChild(idProperties);
     }
     if (selectedOptions.length > 0) { addProperties.style.display = "none"; }
+<<<<<<< HEAD
 
 
 
+=======
+}
+
+
+
+
+function addToFavorites(productId) {
+    $.ajax({
+        url: '/favorite-product-add',
+        type: 'POST',
+        data: {
+            _token: '{{ csrf_token() }}',
+            product_id: productId
+        },
+        success: function(response) {
+            // Xử lý kết quả thành công
+        },
+        error: function(xhr, status, error) {
+            // Xử lý lỗi
+        }
+    });
+}
+
+function removeFromFavorites(productId) {
+    $.ajax({
+        url: '/favorite-product-remove',
+        type: 'POST',
+        data: {
+            _token: '{{ csrf_token() }}',
+            product_id: productId
+        },
+        success: function(response) {
+            // Xử lý kết quả thành công
+        },
+        error: function(xhr, status, error) {
+            // Xử lý lỗi
+        }
+    });
+>>>>>>> nguyenPhuongTri
 }

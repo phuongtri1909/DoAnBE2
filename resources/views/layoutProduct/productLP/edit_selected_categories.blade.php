@@ -28,7 +28,11 @@
                     name="idProduct" required autofocus>
 
                 <div class="d-grid mx-auto text-center">
+<<<<<<< HEAD
                     <button type="submit" class="btn btn-outline-success ">Tiếp tục thêm</button>
+=======
+                    <button type="submit" class="btn btn-outline-success ">Tiếp tục sửa</button>
+>>>>>>> nguyenPhuongTri
                     <a href="{{route('product.index')}}" class="btn btn-outline-secondary ">                 
                         <span class="text">Trở về</span>
                     </a>
