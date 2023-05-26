@@ -435,7 +435,6 @@
         left: 0;
         width: 100%;
         z-index: 999;
-       
     }
     
     .sticky {
@@ -1152,8 +1151,6 @@
 \*----------------------------*/
     
     .products-slick .slick-list {
-        padding-bottom: 60px;
-        margin-bottom: -60px;
         z-index: 2;
     }
     
@@ -1176,8 +1173,6 @@
         visibility: visible;
         height: auto;
     }
-    
-
     
     .products-slick-nav .slick-prev,
     .products-slick-nav .slick-next {
@@ -2174,25 +2169,30 @@
             margin-top: 10px;
         }
     }
-    .all-order{
+    
+    .all-order {
         padding-top: 100px;
     }
+    
     .search {
         padding-top: 140px;
     }
-    .favorite{
+    
+    .favorite {
         padding-top: 100px;
-    }
-.order{
-    padding-top: 100px;
-}
-    .cart{
-        padding-top: 100px;
-    }
-    .order_lookup{
-        padding-top: 150px;
     }
     
+    .order {
+        padding-top: 100px;
+    }
+    
+    .cart {
+        padding-top: 100px;
+    }
+    
+    .order_lookup {
+        padding-top: 150px;
+    }
     
     .title-search {
         color: #b4b4b4;
@@ -2205,15 +2205,14 @@
         font-size: 16px;
         text-align: center;
     }
-
-    .no-result{
+    
+    .no-result {
         padding-top: 30px;
         text-align: center;
         font-size: 30px;
         color: #000000;
-       
     }
-
+    
     .button {
         background-color: transparent;
         border: none;
@@ -2221,9 +2220,49 @@
         font-size: 16px;
         line-height: 1;
         text-align: center;
-      }
-
-      .text-muted{
+    }
+    
+    .text-muted {
         border: none;
         background-color: #ffffff;
-      }
+    }
+    
+    .mod-category {
+        padding-bottom: 20px;
+    }
+    
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .pagination .pagination {
+        margin: 0;
+    }
+    
+    .pagination .page-item {
+        display: inline-block;
+        margin-right: 5px;
+        padding: 5px 10px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+    }
+    
+    .pagination .page-item.active {
+        background-color: #007bff;
+        color: #fff;
+        border-color: #007bff;
+    }
+    
+    .pagination .page-item:hover {
+        background-color: #eee;
+        border-color: #ddd;
+    }
+    
+    .pagination .page-item.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }

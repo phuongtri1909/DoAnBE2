@@ -34,7 +34,7 @@ class HomeController extends Controller
                 ->where('products.productCategory', $category->id)
                 ->groupBy('products.id', 'products.productName', 'products.productPrice')
                 ->orderBy('products.created_at', 'desc')
-                ->take(15)
+                ->take(10)
 
                 ->get();
             $product_by_category[$category->id] = $products;
@@ -42,28 +42,77 @@ class HomeController extends Controller
 
         if (auth()->check()) {
             $product_favorite = Product_favorite::where('user_id', auth()->user()->id)->get();
-        }
-        else{
+        } else {
             $product_favorite = null;
         }
 
         return view('website.home', compact('categories', 'product_by_category', 'manufacturer_by_category', 'product_favorite'));
     }
 
-    public function categoryUser()
+    public function categoryUser($categoryName)
     {
-       
+        $categoryName =   ucwords(str_replace('-', ' ', $categoryName));
+        
+        $products = DB::table('products')
+            ->select('products.id', 'products.productName', 'products.productPrice', DB::raw('MIN(product_images.product_imageName) AS product_imageName'))
+            ->leftJoin('product_images', 'products.id', '=', 'product_images.product_id')
+            ->groupBy('products.id', 'products.productName', 'products.productPrice')
+            ->join('categories', 'categories.id', '=', 'products.productCategory')
+            ->where('categories.categoryName', $categoryName)
+            ->paginate(6);
+
+        $manufacturers = DB::table('manufacturers')
+            ->join('products', 'manufacturers.id', '=', 'products.productManu')
+            ->join('categories', 'products.productCategory', '=', 'categories.id')
+            ->where('categories.categoryName', $categoryName)
+            ->orderBy('categories.created_at', 'desc')
+            ->select('manufacturers.*')
+            ->distinct()
+            ->get();
+
+
+        if (auth()->check()) {
+            $product_favorite = Product_favorite::where('user_id', auth()->user()->id)->get();
+        } else {
+            $product_favorite = null;
+        }
+$manufacturerName = null;
+        
+        return view('website.all_product_category', compact('products', 'product_favorite', 'categoryName', 'manufacturers','manufacturerName'));
     }
+
+    public function categoryByManufacturer($categoryName, $manufacturerName)
+    {
+        $categoryName = ucwords(str_replace('-', ' ', $categoryName));
+        $manufacturerName = ucwords(str_replace('-', ' ', $manufacturerName));
+    
+        $products = DB::table('products')
+            ->select('products.id', 'products.productName', 'products.productPrice', DB::raw('MIN(product_images.product_imageName) AS product_imageName'))
+            ->join('manufacturers', 'manufacturers.id', '=', 'products.productManu')
+            ->leftJoin('product_images', 'products.id', '=', 'product_images.product_id')
+            ->groupBy('products.id', 'products.productName', 'products.productPrice')
+            ->join('categories', 'categories.id', '=', 'products.productCategory')
+            ->where('categories.categoryName', $categoryName)
+            ->where('manufacturers.manufacturerName', $manufacturerName)
+            ->paginate(6);
+            
+            if (auth()->check()) {
+                $product_favorite = Product_favorite::where('user_id', auth()->user()->id)->get();
+            } else {
+                $product_favorite = null;
+            }
+        return view('website.all_product_category', ['product_favorite'=>  $product_favorite,'products' => $products,'categoryName'=>$categoryName,'manufacturerName'=>$manufacturerName,'manufacturers'=> null]);
+    }
+
 
     public function detailProduct($productName)
     {
+        $productName =   ucwords(str_replace('-', ' ', $productName));
 
-      
-     $productName =   ucwords(str_replace('-', ' ', $productName));
         $product = Product::select('products.*')
             ->join('categories', 'products.productCategory', '=', 'categories.id')
             ->join('manufacturers', 'products.productManu', '=', 'manufacturers.id')
-            ->where('products.productName',$productName)
+            ->where('products.productName', $productName)
             ->get();
 
         $productAttributes = Product::select('properties.propertiesName as attributteName', 'product_attributes.attribute_value as attributeValue')
@@ -81,7 +130,6 @@ class HomeController extends Controller
             return view('website.detail_product', compact('product', 'productAttributes', 'product_image'));
         }
         return view('website.link_not_found');
-
     }
 
     public function search(Request $request)
@@ -101,14 +149,12 @@ class HomeController extends Controller
             $count++;
         }
 
-        if(auth()->check())
-        {
-            $product_favorite = Product_favorite::where('user_id',auth()->user()->id)->get();      
-        }
-        else{
+        if (auth()->check()) {
+            $product_favorite = Product_favorite::where('user_id', auth()->user()->id)->get();
+        } else {
             $product_favorite = null;
         }
-        
-        return view('website.search_products', compact('count', 'keyword', 'products','product_favorite'));
+
+        return view('website.search_products', compact('count', 'keyword', 'products', 'product_favorite'));
     }
 }

@@ -72,6 +72,11 @@ class ProductCartController extends Controller
             $product_cart->save();
         }
 
+        $cartItemCount = DB::table('product_carts')
+        ->where('user_id', $user->id)
+        ->count();
+        session()->put('cart', $cartItemCount);
+        
         return back();
     }
 
@@ -92,9 +97,12 @@ class ProductCartController extends Controller
             } else {
                 $product_cart->decrement('quantity', 1);
             }
-
         }
-
+        $cartItemCount = DB::table('product_carts')
+        ->where('user_id', $user->id)
+        ->count();
+        session()->put('cart', $cartItemCount);
+        
         return back();
     }
 
@@ -102,6 +110,41 @@ class ProductCartController extends Controller
     {
         $product_cart = ProductCart::find($request->product_cart_id);
         $product_cart->delete();
+
+        $cartItemCount = DB::table('product_carts')
+        ->where('user_id', auth()->user()->id)
+        ->count();
+        
+        session()->put('cart', $cartItemCount);
         return redirect()->back();
+        
+      
+    }
+
+    public function cartProductBye(Request $request)
+    {
+        $productId = $request->input('product_id');
+
+        $user = Auth::user();
+
+        $product_cart = ProductCart::where('user_id', $user->id)
+            ->where('product_id', $productId)
+            ->first();
+
+        if ($product_cart) {
+            $product_cart->increment('quantity');
+        } else {
+            $product_cart = new ProductCart([
+                'product_id' => $productId,
+                'user_id' => $user->id,
+                'quantity' => "1",
+            ]);
+            $product_cart->save();
+        }
+        $cartItemCount = DB::table('product_carts')
+        ->where('user_id', $user->id)
+        ->count();
+        session()->put('cart', $cartItemCount);
+        return redirect()->route('productCart');
     }
 }
