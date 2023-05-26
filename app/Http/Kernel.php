@@ -71,5 +71,7 @@ class Kernel extends HttpKernel
         'adminMiddleware' => \App\Http\Middleware\AdminMiddleware::class,
         'redirectIfNotLoggedIn' => \App\Http\Middleware\RedirectIfNotLoggedIn::class,
         'loginRequired' => \App\Http\Middleware\LoginRequired::class,
+        'blockGetRequestsToPostRoutes' => \App\Http\Middleware\BlockGetRequestsToPostRoutes::class,
+        
     ];
 }

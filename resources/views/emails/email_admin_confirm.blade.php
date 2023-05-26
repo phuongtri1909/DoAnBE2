@@ -6,6 +6,7 @@
       <p>Xin chào {{ $order->fullName }},</p>
       <p>Chúng tôi đã xác nhận đơn hàng của bạn và sẽ sớm giao tới bạn.</p>
       <p>Nếu bạn có bất kỳ câu hỏi nào về đơn hàng của mình, vui lòng liên hệ với chúng tôi qua email được gửi tới bạn.</p>
+ 
       <p>Xin cảm ơn!</p>
     </div>
     <div class="footer">
