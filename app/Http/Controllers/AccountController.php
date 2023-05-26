@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Constants\UserType;
 use App\Models\User;
-use URL;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -94,8 +92,8 @@ class AccountController extends Controller
         if (Auth::attempt($credentials)) {
 
             $previousUrl = Session::get('previousUrl');
-          
-             if ($previousUrl) {
+
+            if ($previousUrl) {
                 Session::forget('previousUrl');
                 return redirect()->to($previousUrl);
             } else if (auth()->user()->typeID == UserType::ADMIN) {
