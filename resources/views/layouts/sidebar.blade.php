@@ -39,13 +39,13 @@
     </ul>
     <ul class="side-menu">
         <li>
-            <a href="#">
+            <a href="{{ route('allOrderAdmin') }}">
                 <i class='bx bxs-cog' ></i>
-                <span class="text">Cài đặt</span>
+                <span class="text">Quản lý đơn hàng</span>
             </a>
         </li>
         <li>
-            <a href="#" class="logout">
+            <a href="{{ route('signout') }}" class="logout">
                 <i class='bx bxs-log-out-circle' ></i>
                 <span class="text">Đăng Xuất</span>
             </a>
