@@ -22,6 +22,7 @@
             </div>
 
             <h2 class="tittle-log">Đăng ký</h2>
+
             <form action="{{ route('createUser') }}" method="POST">
                 @csrf
                 <div class="inputbox">
@@ -74,7 +75,6 @@
 
 
                 <button class="signup_button" type="submit">Đăng ký</button>
-
             </form>
             <div class="letter">hoặc</div>
             <div class="login_link">Bạn đã có tài khoản? <a href="{{ route('loginUser') }}">đăng nhập ngay</a></div>

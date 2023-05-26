@@ -23,10 +23,10 @@
 
                     <div class="header-ctn">
 
-                        <div class="bg-nav">
-                            <a href="#">
-                                <i class="fa-solid fa-bars"></i>
-                                <span>Danh mục</span>
+                        <div class="bg-nav-hover">
+                            <a href="{{ route('allOrder') }}">
+                                <i class="fa-regular fa-chart-bar"></i>
+                                <span>Đơn hàng của tôi</span>
                             </a>
                         </div>
 
@@ -51,7 +51,7 @@
                     <div class="header-ctn">
 
                         <div class="bg-nav-hover">
-                            <a href="#">
+                            <a href="{{ route('orderLookup') }}">
                                 <i class="fa-solid fa-truck-fast"></i>
                                 <span>Tra cứu mua hàng</span>
 
@@ -60,7 +60,7 @@
                         </div>
 
                         <div class="bg-nav-hover">
-                            <a href="#">
+                            <a href="{{ route('productCart') }}">
                                 <i class="fa fa-shopping-cart"></i>
 
                                 <span>Giỏ hàng của tôi</span>
@@ -78,7 +78,7 @@
                         @if (auth()->check() )
                             <div class="bg-nav ">
                                 <a href="{{ route('signout') }}">
-                                    <i class="fa-solid fa-circle-user"></i>
+                                    <i class="fa-solid fa-user"></i>
                                     <span>{{ auth()->user()->fullName }}</span>
                                 </a>
                             </div>
@@ -86,7 +86,7 @@
                         @else
                             <div class="bg-nav ">
                                 <a href="{{ route('loginUser') }}">
-                                    <i class="fa-solid fa-circle-user"></i>
+                                    <i class="fa-solid fa-user"></i>
                                     <span>Đăng nhập</span>
                                 </a>
                             </div>

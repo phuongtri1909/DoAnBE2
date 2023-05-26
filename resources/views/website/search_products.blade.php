@@ -34,7 +34,7 @@
 
                                     <img src="{{ asset('images/' . $product->product_imageName) }}" alt="">
                                     <div class="product-label">
-                                        <span class="sale">-30%</span>
+                                        {{-- <span class="sale">-30%</span> --}}
                                     </div>
                                 </div>
                                 <div class="product-body">

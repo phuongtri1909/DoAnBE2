@@ -8,7 +8,7 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
     <link type="text/css" rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <link type="text/css" rel="stylesheet" href="{{ asset('css/detail.css') }}" />
@@ -20,7 +20,6 @@
     @include('layoutWebs.header')
 
     @foreach ($product as $item)
-
         <div class="container">
 
             <div class="detail">
@@ -67,7 +66,7 @@
                                                 </div>
                                             @endif
                                         @endforeach
-                                        
+
                                     </div>
 
                                     <button class="carousel-control-prev" type="button"
@@ -189,9 +188,8 @@
                                     </div>
                                     <div class="col-md-4">
 
-                                        <form
-                                            action="{{ route('cartProductAdd') }}"
-                                            method="POST" enctype="multipart/form-data">
+                                        <form action="{{ route('cartProductAdd') }}" method="POST"
+                                            enctype="multipart/form-data">
                                             @csrf
                                             <input hidden value="{{ $item->id }}" type="text" id="product_id"
                                                 class="form-control" name="product_id" required autofocus>

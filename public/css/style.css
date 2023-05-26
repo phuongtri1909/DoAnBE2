@@ -435,6 +435,7 @@
         left: 0;
         width: 100%;
         z-index: 999;
+       
     }
     
     .sticky {
@@ -2173,13 +2174,25 @@
             margin-top: 10px;
         }
     }
-    
+    .all-order{
+        padding-top: 100px;
+    }
     .search {
         padding-top: 140px;
     }
     .favorite{
         padding-top: 100px;
     }
+.order{
+    padding-top: 100px;
+}
+    .cart{
+        padding-top: 100px;
+    }
+    .order_lookup{
+        padding-top: 150px;
+    }
+    
     
     .title-search {
         color: #b4b4b4;
@@ -2208,4 +2221,9 @@
         font-size: 16px;
         line-height: 1;
         text-align: center;
+      }
+
+      .text-muted{
+        border: none;
+        background-color: #ffffff;
       }
