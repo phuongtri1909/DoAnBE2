@@ -6,6 +6,19 @@ use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
 {
+
+
+    protected $routeMiddleware = [
+        // Các middleware khác ở đây
+        'adminMiddleware' => \App\Http\Middleware\AdminMiddleware::class,
+        'redirectIfNotLoggedIn' => \App\Http\Middleware\RedirectIfNotLoggedIn::class,
+        'loginRequired' => \App\Http\Middleware\LoginRequired::class,
+        'blockGetRequestsToPostRoutes' => \App\Http\Middleware\BlockGetRequestsToPostRoutes::class,  
+      
+        'blockGetRequestsToPostRoutesAdmin' => \App\Http\Middleware\BlockGetRequestsToPostRoutesAdmin::class,  
+       
+    ];
+
     /**
      * The application's global HTTP middleware stack.
      *
@@ -30,6 +43,7 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
+           
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
@@ -63,5 +77,7 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+     
     ];
+
 }

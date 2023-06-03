@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Category;
-use PhpParser\Node\Stmt\Catch_;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
 
     public function addCategory()
-    {     
-      return view('products.category_product.add_category');
+    {
+        return view('products.category_product.add_category');
     }
     public function index()
     {
@@ -22,8 +21,9 @@ class CategoryController extends Controller
 
     public function adminCreateCategory(Request $request)
     {
+        
         $request->validate([
-            'categoryName' => 'required|unique:categories',
+            'categoryName' => 'required|unique:categories|max:255',
         ]);
         $data = $request->all();
         $check = $this->create($data);
@@ -40,24 +40,31 @@ class CategoryController extends Controller
     public function editCategory(Request $request)
     {
         $data = $request->all();
-        
         $category = Category::findOrFail($data['idCategory']);
         return view('products.category_product.edit_category', compact('category'));
     }
-    
-    public function adminUpdateCategory(Request $request, $id){
-      
-    $category = Category::find($id);
-    $category->categoryName = $request['categoryName'];
-    $category->save();
-       return redirect()->route('category');
+
+    public function adminUpdateCategory(Request $request, $id)
+    {
+        $request->validate([
+            'categoryName' => 'required|unique:categories|max:255',
+        ]);
+        $category = Category::find($id);
+        if($category)
+        {
+        $category->categoryName = $request['categoryName'];
+        $category->save();
+        }
+        return redirect()->route('category');
     }
-    
+
     public function delete(Request $request)
     {
         $category = Category::find($request['idCategory']);
-        $category->delete();
-        return redirect()->route('category');
+        if ($category) {
+            $category->delete();         
+        } 
+         return redirect()->route('category');
     }
 
 }

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Properties;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PropertiesController extends Controller
 {
@@ -12,11 +14,15 @@ class PropertiesController extends Controller
      */
     public function index()
     {
-       
-        $properties = Properties::orderBy('created_at', 'desc')->get();
-           
+        $result = DB::table('properties')
+            ->join('categories', 'properties.category_id', '=', 'categories.id')
+            ->select('categories.*', 'properties.*')
+        //->where('properties.category_id', '=', $id)
+            ->get();
+        // $properties = Properties::orderBy('created_at', 'desc')->get();
+        //  $categoryName = $properties->category_id;
         $pageName = "Thuộc Tính";
-        return view('products.properties_product.properties', compact('pageName', 'properties'));
+        return view('products.properties_product.properties', compact('pageName', 'result'));
     }
 
     /**
@@ -24,7 +30,8 @@ class PropertiesController extends Controller
      */
     public function create()
     {
-        return view('products.properties_product.create_properties');
+        $categories = Category::orderBy('created_at', 'desc')->get();
+        return view('products.properties_product.create_properties', compact('categories'));
     }
 
     /**
@@ -34,11 +41,14 @@ class PropertiesController extends Controller
     {
 
         $request->validate([
-            'propertiesName' => 'required|unique:properties',
+            'propertiesName' => 'required|max:255',
+
         ]);
         $properties = new Properties;
         $properties->propertiesName = $request['propertiesName'];
+        $properties->category_id = $request['category'];
         $properties->save();
+
         return redirect()->route('properties.index');
     }
 
@@ -49,13 +59,20 @@ class PropertiesController extends Controller
     {
     }
 
+
+    public function editProperties(Request $request)
+    {
+        $properties = Properties::find($request->idproperties);
+
+        $categories = Category::orderBy('created_at', 'desc')->get();
+        return view('products.properties_product.edit_properties', compact('properties', 'categories'));
+    }
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        $properties = Properties::find($id);
-        return view('products.properties_product.edit_properties', compact('properties'));
+      
     }
 
     /**
@@ -63,10 +80,18 @@ class PropertiesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
+
+        $request->validate([
+            'propertiesName' => 'required|max:255',
+
+        ]);
         $properties = Properties::find($id);
+        if($properties)
+        {
         $properties->propertiesName = $request['propertiesName'];
+        $properties->category_id = $request['category'];
         $properties->save();
+        }
         return redirect()->route('properties.index');
     }
 
@@ -76,7 +101,9 @@ class PropertiesController extends Controller
     public function destroy(string $id)
     {
         $properties = Properties::find($id);
-        $properties->delete();
+        if ($properties) {
+            $properties->delete();
+        }
         return redirect()->route('properties.index');
     }
 }

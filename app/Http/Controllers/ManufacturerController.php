@@ -24,7 +24,7 @@ class ManufacturerController extends Controller
   public function adminCreateManufacturer(Request $request)
   {
     $request->validate([
-      'manufacturerName' => 'required|unique:manufacturers',
+      'manufacturerName' => 'required|unique:manufacturers|max:255',
     ]);
     $data = $request->all();
     $check = $this->create($data);
@@ -47,9 +47,16 @@ class ManufacturerController extends Controller
 
   public function adminUpdateManufacturer(Request $request, $id)
   {
+    
     $manufacturer = Manufacturer::find($id);
+    $request->validate([
+      'manufacturerName' => 'required|unique:manufacturers|max:255',
+    ]);
+    if($manufacturer)
+    {
     $manufacturer->manufacturerName = $request['manufacturerName'];
     $manufacturer->save();
+    }
     return redirect()->route('manufacturer');
   }
 
@@ -57,7 +64,11 @@ class ManufacturerController extends Controller
   {
 
     $manufacturer = Manufacturer::find($request['idManufacturer']);
-    $manufacturer->delete();
+    if($manufacturer)
+    {
+      $manufacturer->delete();
+    }
+    
     return redirect()->route('manufacturer');
   }
 }
